@@ -1,0 +1,110 @@
+expose:
+  type: nodePort
+  tls:
+    enabled: true
+    certSource: auto
+    auto:
+      commonName: "13.126.138.68"
+  nodePort:
+    ports:
+      http:
+        port: 80
+        nodePort: 30002
+      https:
+        port: 443
+        nodePort: 30003
+      notary:
+        port: 4443
+        nodePort: 30004
+
+externalURL: https://13.126.138.68:30003
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      existingClaim: ""
+      storageClass: "gp3"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 5Gi
+    chartmuseum:
+      existingClaim: ""
+      storageClass: "gp3"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 5Gi
+    jobservice:
+      existingClaim: ""
+      storageClass: "gp3"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    database:
+      existingClaim: ""
+      storageClass: "gp3"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    redis:
+      existingClaim: ""
+      storageClass: "gp3"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    trivy:
+      existingClaim: ""
+      storageClass: "gp3"
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 5Gi
+  imageChartStorage:
+    type: s3
+    s3:
+      region: ap-south-1
+      bucket: harbor-storage-20250218-110405
+      regionendpoint: s3.ap-south-1.amazonaws.com
+      accesskey: ""
+      secretkey: ""
+      rootdirectory: /harbor
+      storageclass: STANDARD
+      v4auth: true
+      secure: true
+      accelerate: true
+      existingSecret: "aws-s3-secret"
+      existingSecretKey: ""
+
+harborAdminPassword: "Harbor12345"
+
+notary:
+  enabled: false
+
+internalTLS:
+  enabled: true
+  certSource: auto
+
+trivy:
+  enabled: true
+  skipUpdate: false
+  gitHubToken: ""
+  offlineScan: false
+
+portal:
+  replicas: 1
+
+core:
+  replicas: 1
+
+jobservice:
+  replicas: 1
+
+registry:
+  replicas: 1
+
+chartmuseum:
+  enabled: false
+
+metrics:
+  enabled: false
+
