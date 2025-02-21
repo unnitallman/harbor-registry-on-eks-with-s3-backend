@@ -15,3 +15,7 @@ kubectl get secret aws-s3-secret -n harbor -o jsonpath='{.data}' | jq
 helm repo add harbor https://helm.goharbor.io && helm repo update
 helm install harbor harbor/harbor -n harbor -f values.yaml
 ```
+
+## Video demo
+
+[https://unni.neetorecord.com/watch/79b8e83f626ce34057b3](https://unni.neetorecord.com/watch/79b8e83f626ce34057b3)
